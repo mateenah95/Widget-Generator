@@ -86,27 +86,19 @@
         </div>
         <script type="text/javascript">
             $('.button').click(function() {
+                var succeed = false;
                 function copyToClipboard() {
-                    var target;
                     var elem = document.getElementsByClassName('share-code')[0];
-                    var isInput = elem.tagName === "INPUT";
-                    var origSelectionStart, origSelectionEnd;
-                    if(isInput) {
-                        target = elem;
-                        origSelectionStart = elem.selectionStart;
-                        origSelectionEnd = elem.selectionEnd;
-                    }
-                    var currentFocus = document.activeElement;
-                    target.focus();
-                    target.setSelectionRange(0, target.value.length);
-                    var succeed;
+                    elem.select();
                     try {
-                        succeed = document.execCommand("copy");
-                    } catch(e) {
-                        succeed = false;
+                        document.execCommand("copy");
+                        $('.share-code').val("Code Copied!");
+                        succeed = true;
                     }
-                    $('.share-code').val("Code Copied!");
-                    return succeed;
+                    catch(e) {
+                        alert("Failed to copy");
+                    }
+                    
                 }
                 copyToClipboard();
 
@@ -125,7 +117,9 @@
                 var count = 3;
                 var timer = setTimeout(function() {
                     setInterval(function() {
-                        handleTimer(count);
+                        if(succeed == true) {
+                            handleTimer(count);
+                        }
                     }, 1000);
                 }, 1000);
             });
