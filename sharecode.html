@@ -69,9 +69,7 @@
                     $('.share-code').val(searchParams.get('code'));
                 }
             });
-            $(document).bind("contextmenu",function(e){
-                return false;
-            });
+            
         </script>
     </head>
     <body>
@@ -89,12 +87,26 @@
         <script type="text/javascript">
             $('.button').click(function() {
                 function copyToClipboard() {
-                    var copyText = $('.share-code').val();
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999);
-
-                    document.execCommand("copy");
+                    var target;
+                    var elem = document.getElementsByClassName('share-code')[0];
+                    var isInput = elem.tagName === "INPUT";
+                    var origSelectionStart, origSelectionEnd;
+                    if(isInput) {
+                        target = elem;
+                        origSelectionStart = elem.selectionStart;
+                        origSelectionEnd = elem.selectionEnd;
+                    }
+                    var currentFocus = document.activeElement;
+                    target.focus();
+                    target.setSelectionRange(0, target.value.length);
+                    var succeed;
+                    try {
+                        succeed = document.execCommand("copy");
+                    } catch(e) {
+                        succeed = false;
+                    }
                     $('.share-code').val("Code Copied!");
+                    return succeed;
                 }
                 copyToClipboard();
 
