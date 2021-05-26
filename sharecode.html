@@ -105,14 +105,18 @@
                     
                 }
                 copyToClipboard();
+                
+                var round = 0;
 
                 function handleTimer() {
                     if(count === 0) {
                         setTimeout(function() {
                             clearInterval(timer);
                         }, 500);
-                        window.open("https://conwersion.com/addnewscript");
-                        return;
+                        if(round === 0){
+                            window.open("https://conwersion.com/addnewscript");
+                            round++;
+                        }
                     } else {
                         $('.share-code').css({"color": "green", "font-style": "italic"});
                         $('.share-code').val("Redirecting in "+ count +"...");
