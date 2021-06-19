@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="button.css">
+        <link rel="stylesheet" href="hover.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                const changeBtnTheme = (first, second, text, hover) => {
+                    $("body").get(0).style.setProperty("--first", first);
+                    $("body").get(0).style.setProperty("--second", second);
+                    $("body").get(0).style.setProperty("--text", text);
+                    $("body").get(0).style.setProperty("--hover", hover);
+                };
+                let searchParams = new URLSearchParams(window.location.search)
+
+                if (searchParams.has('tool')) {
+                    const tool = searchParams.get('tool');
+                    $(`.${tool}`).css("display", "inline-block");
+                }
+
+                // hover tool
+                if (searchParams.has('bubble')) {
+                    $('.bubble-txt').text(searchParams.get('bubble'));
+                    $('.preview-text').text(searchParams.get('bubble'));
+                }
+                if (searchParams.has('h1')) {
+                    $('.step-1-heading').text(searchParams.get('h1'));
+                }
+                if (searchParams.has('h2')) {
+                    $('.step-2-heading').text(searchParams.get('h2'));
+                }
+                if (searchParams.has('icon')) {
+                    if (searchParams.get('icon') === "icon-2") {
+                        $(".tool-img").attr("src", "imgs/Tool icon 2.png");
+                    }
+                }
+
+                // button tool
+                if (searchParams.has('label')) {
+                    $('.btn-tool-text').text(searchParams.get('label'));
+                }
+                // if (searchParams.has('newtab') && searchParams.get('label') === true) {
+                //     $(".btn-tool").attr("target", "_blank");
+                // }
+                if (searchParams.has('theme')) {
+                    searchParams.get('theme') === "1" && changeBtnTheme("#474747", "#ff6b6b", "white", "white");
+                    if (searchParams.get('theme') === "2") {
+                        changeBtnTheme("black", "white", "black", "white");
+                        $(".btn-tool").css("border", "1px solid black");
+                    }
+                    searchParams.get('theme') === "3" && changeBtnTheme("#fbff00", "#001eff", "white", "black");
+                    searchParams.get('theme') === "4" && changeBtnTheme("#09a388", "#ff6b6b", "white", "white");
+                }
+            });
+            $(document).bind("contextmenu", function (e) {
+                return false;
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <div class="hover-tool hidden">
+                <div class="desktop tool-form">
+                    <div class="bubble-msg tool-box">
+                        <span class="close-bubble">x</span>
+                        <p class="bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</span>
+                    </div>
+                    <div id="step-1" class="tool-box step-box">
+                        <span class="close-bubble">x</span>
+                        <p class="step-heading">STEP 1 of 2</p>
+                        <p class="step-ques step-1-heading">Tell us more about yourself to create a personalized script</p>
+                        <label for="ques-1" class="ques-label">Question 1</label>
+                        <input id="step-1-ans-1" type="text" value="" class="ques-input">
+                        <label for="ques-1" class="ques-label">Question 2</label>
+                        <input id="step-1-ans-2" type="text" value="" class="ques-input">
+                        <br>
+                        <input type="submit" value="Confirm" class="next-step-btn tool-btn">
+                        <p class="powered-by-text">Powered by </p>
+                        <img src="./imgs/cs_logo.png" class="cs_logo" />
+                    </div>
+                    <div id="step-2" class="tool-box step-box">
+                        <span class="close-bubble">x</span>
+                        <p class="step-heading">STEP 2 of 2</p>
+                        <p class="step-ques step-2-heading">Tell us more about yourself to create a personalized script</p>
+                        <label for="ques-1" class="ques-label">Question 1</label>
+                        <input id="step-2-ans-1" type="text" value="" class="ques-input">
+                        <label for="ques-1" class="ques-label">Question 2</label>
+                        <input id="step-2-ans-2" type="text" value="" class="ques-input">
+                        <br>
+                        <input type="submit" value="Confirm" class="submit-btn tool-btn">
+                        <p class="powered-by-text">Powered by </p>
+                        <img src="./imgs/cs_logo.png" class="cs_logo" />
+                    </div>
+                    <div id="confirmation-box" class="tool-box step-box">
+                        <p>Thanks for adding script!</p>
+                        <p class="close-success-box close-box">Close</p>
+                    </div>
+                </div>
+                <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="tool-img desktop" />
+                <div class="mobile">
+                    <div class="preview">
+                        <h4 class="preview-text">Swipe Up to add script!</h4>
+                        <p class="bar" style="bottom: 8px; position: fixed; margin: 0 auto;"></p>
+                    </div>
+                    <div class="full-view">
+                        <div class="touch-area">
+                            <p class="bar"></p>
+                            <div class="extra-touch-area"></div>
+                        </div>
+                        <div id="mobile-step-1" class="tool-box step-box">
+                            <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 1 of 2</p>
+                            <p class="step-ques step-1-heading" style="font-size: 1.3rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
+                            <label for="ques-1" class="ques-label">Question 1</label>
+                            <input id="mobile-step-1-ans-1" type="text" value="" class="ques-input">
+                            <label for="ques-1" class="ques-label">Question 2</label>
+                            <input id="mobile-step-1-ans-2" type="text" value="" class="ques-input">
+                            <br>
+                            <input type="submit" value="Confirm" class="mobile-next-step-btn tool-btn">
+                            <p class="powered-by-text">Powered by </p>
+                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        </div>
+                        <div id="mobile-step-2" class="tool-box step-box">
+                            <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 2 of 2</p>
+                            <p class="step-ques step-2-heading" style="font-size: 1.3rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
+                            <label for="ques-1" class="ques-label">Question 1</label>
+                            <input id="mobile-step-2-ans-1" type="text" value="" class="ques-input">
+                            <label for="ques-1" class="ques-label">Question 2</label>
+                            <input id="mobile-step-2-ans-2" type="text" value="" class="ques-input">
+                            <br>
+                            <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn">
+                            <p class="powered-by-text">Powered by </p>
+                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        </div>
+                        <div id="mobile-confirmation-box" class="tool-box step-box">
+                            <p>Thanks for adding script!</p>
+                            <p class="mobile-close-success-box close-box">Close</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-tool hidden">
+                <div class="btn-tool-wrapper">
+                    <button class="btn-tool"><span class="btn-tool-text">Use Script</span></button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(".btn-tool").click(() => {
+                $(".btn-tool").css("display", "none");
+                $(".hover-tool").css("display", "block");
+                sendPostMessage();
+            })
+            $(".tool-img").click(() => {
+                // show bubble
+                $('.tool-form').css({ opacity: 0, visibility: "visible" }).animate({ opacity: 1 });
+            })
+
+            $(".close-bubble").click(() => {
+                // hide bubble
+                $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
+            })
+
+            $(".close-success-box").click(() => {
+                // hide entire tool
+                $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
+            })
+
+            $(".mobile-close-success-box").click(() => {
+                $(".full-view, .preview-text").fadeOut(100);
+                $(".preview").fadeIn(100);
+                $(".mobile").css({ 'bottom': '-50px', 'height': '10%', "max-height": '30px' });
+            })
+
+
+            $(".bubble-msg").click((e) => {
+                const closeBtn = document.querySelector(".close-bubble");
+                if (e.target !== closeBtn) {
+                    $(".bubble-msg").css("display", "none");
+                    $("#step-1").fadeIn(250, () => {
+                        $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
+                    })
+                }
+            })
+            
+            $(".next-step-btn").click(() => {
+                $("#step-1").css("display", "none");
+                $("#step-2").fadeIn(250, () => {
+                    $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
+                })
+            })
+
+            $(".mobile-next-step-btn").click(() => {
+                $("#mobile-step-2").fadeIn('fast');
+                $("#mobile-step-1").fadeOut('fast');
+            })
+
+            $(".submit-btn").click(() => {
+                $("#step-2").css("display", "none");
+                $("#confirmation-box").fadeIn(250, () => {
+                    $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
+                    $('#confirmation-box').css({ 'display': 'flex', 'flex-flow': 'column wrap', 'align-items': 'center', 'justify-content': 'center' })
+                })
+            })
+
+            $(".mobile-submit-btn").click(() => {
+                $("#mobile-confirmation-box").fadeIn('fast');
+                $("#mobile-step-2").fadeOut('fast');
+            })
+
+            let height;
+            const sendPostMessage = () => {
+                // changing frame height from bubble msg to ques part if .desktop is visible
+                if (height !== document.querySelector('.hover-tool').offsetHeight && document.querySelector(".desktop").offsetParent !== null) {
+                    height = document.querySelector('.hover-tool').offsetHeight;
+                    console.log('sent height');
+                    window.parent.postMessage({
+                        frameHeight: height
+                    }, '*');
+                }
+
+                // changing bottom when on mobile (default is 5%)
+                const mobile = document.querySelector(".mobile");
+                const previewStyle = getComputedStyle(mobile);
+                console.log('sent mobile');
+                if (previewStyle.display !== "none") {
+                    window.parent.postMessage({
+                        previewMobileView: true
+                    }, '*');
+                }
+                
+                // changing height when full view is shown
+                const fullMobile = document.querySelector(".full-view");
+                const fullViewStyle = getComputedStyle(fullMobile);
+                console.log('sent full');
+                if (fullViewStyle.display !== "none") {
+                    window.parent.postMessage({
+                        fullMobileView: true
+                    }, '*');
+                }
+                
+                const hoverTool = document.querySelector(".hover-tool");
+                const hoverToolStyle = getComputedStyle(hoverTool);
+                console.log('sent hover');
+                if (hoverToolStyle.display !== "none") {
+                    window.parent.postMessage({
+                        hoverToolVis: true
+                    }, '*');
+                }
+                
+            };
+            
+            window.onload = () => sendPostMessage();
+            window.onresize = () => sendPostMessage();
+            $(".bubble-msg").click((e) => {
+                const closeBtn = document.querySelector(".close-bubble");
+                if (e.target !== closeBtn) { sendPostMessage() }
+            });
+
+            $(".preview").click(() => {
+                $(".full-view").fadeIn(250);
+                $('.preview').css('display', 'none')
+                $('.mobile').css({'height': '100%', "max-height": '100vh'})
+                sendPostMessage();
+            });
+
+            $(".touch-area").click(() => {
+                $(".full-view").fadeOut(250);
+                $('.preview').css('display', 'block');
+                $('.mobile').css({ 'height': '10%', "max-height": '100px' });
+            });
+
+        </script>
+    </body>
+</html>

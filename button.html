@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="button.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                const changeBtnTheme = (first, second, text, hover) => {
+                    $("body").get(0).style.setProperty("--first", first);
+                    $("body").get(0).style.setProperty("--second", second);
+                    $("body").get(0).style.setProperty("--text", text);
+                    $("body").get(0).style.setProperty("--hover", hover);
+                };
+
+                let searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('label')) {
+                    $('.btn-tool-text').text(searchParams.get('label'));
+                }
+                // if (searchParams.has('newtab') && searchParams.get('label') === true) {
+                //     $(".btn-tool").attr("target", "_blank");
+                // }
+                if (searchParams.has('theme')) {
+                    searchParams.get('theme') === "1" && changeBtnTheme("#474747", "#ff6b6b", "white", "white");
+                    if (searchParams.get('theme') === "2") {
+                        changeBtnTheme("black", "white", "black", "white");
+                        $(".btn-tool").css("border", "1px solid black");
+                    }
+                    searchParams.get('theme') === "3" && changeBtnTheme("#fbff00", "#001eff", "white", "black");
+                    searchParams.get('theme') === "4" && changeBtnTheme("#09a388", "#ff6b6b", "white", "white");
+                }
+                // hover.html?bubble=Would you like to get personalised script to convert your group members to paying customers?&h1=Heading 1&h2=Heading 2&icon=1
+                if (searchParams.has('bubble')) {
+                    $("#hover_tool_iframe")
+                }
+                if (searchParams.has('h1')) {
+                    $('.step-1-heading').text(searchParams.get('h1'));
+                }
+                if (searchParams.has('h2')) {
+                    $('.step-2-heading').text(searchParams.get('h2'));
+                }
+                if (searchParams.has('icon')) {
+                    if (searchParams.get('icon') === "icon-2") {
+                        $(".tool-img").attr("src", "imgs/Tool icon 2.png");
+                    }
+                }
+            });
+            $(document).bind("contextmenu", function (e) {
+                return false;
+            });
+        </script>
+        <base target="_blank" />
+    </head>
+    <body>
+        <div class="btn-tool-wrapper">
+            <button class="btn-tool"><span class="btn-tool-text">Use Script</span></button>
+        </div>
+        <!-- <iframe
+            src="hover.html?bubble=Would you like to get personalised script to convert your group members to paying customers?&h1=Heading 1&h2=Heading 2&icon=1"
+            id="hover_tool_iframe" width="100%"
+            style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 5%; right: 0; left: 0;"> -->
+        <script type="text/javascript">
+            window.onmessage = (e) => {
+                if (e.data.hasOwnProperty("previewMobileView")) { 
+                    console.log("got mobile");
+                    document.getElementById("conwersion_tool_iframe").style.bottom = 0; 
+                } 
+                if (e.data.hasOwnProperty("fullMobileView")) { 
+                    console.log("got fullView");
+                    document.getElementById("conwersion_tool_iframe").style.height = '100vh'; 
+                } 
+                if (e.data.hasOwnProperty("frameHeight")) { 
+                    console.log("got height");
+                    document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px'; 
+                } 
+            };
+            $(".btn-tool").click(() => {
+                $("#conwersion_tool_iframe").css('display', 'inline');
+            });
+        </script>
+    </body>
+</html>

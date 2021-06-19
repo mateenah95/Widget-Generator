@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+:root {
+    --first: #474747; /* btn first color */
+    --second: #ff6b6b; /* btn second color */
+    --text: white; /* text color w/o hover */
+    --hover: white; /* text color on hover */
+}
+
+.button-tool * {
+    margin: 0;
+}
+        
+.btn-tool-wrapper {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: max-content;
+}
+
+.btn-tool {
+    background: linear-gradient(110deg, var(--first) 20%, var(--second) 20% 100%);
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 40px;
+    font-family: "Poppins";
+    font-size: 15px;
+    color: var(--text);
+    border: 0;
+    border-radius: 5px;
+    text-align: center;
+    transition: all .35s;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.btn-tool:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-radius: 5px;
+    background: var(--first);
+    transition: all .35s;
+}
+
+.btn-tool-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-tool:hover{
+    color: var(--hover);
+}
+
+.btn-tool:hover:after{
+    width: 100%;
+}

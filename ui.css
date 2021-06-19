@@ -26,6 +26,13 @@ body {
     font-family: 'Inter Bold';
     text-align: center;
 }
+#button-preview-iframe {
+    display: inline-block;
+    margin-top: 100px;
+    margin-right: -100px;
+    max-width: 250px;
+    pointer-events: none;
+}
 h2 {
     font-size: 35px;
     margin-bottom: 5px;
@@ -42,15 +49,30 @@ h2 {
 .code {
     margin: 40px auto;
     margin-bottom: 40px;
-    display: none;
     height: max-content;
+    width: 60% !important;
+    display: none;
+}
+.copycode {
+    text-align: left;
+    min-width: 300px;
+}
+.live-preview {
+    text-align: center;
+    margin-left: -10px;
+    margin-top: -15px;
+    position: relative;
+}
+.live-preview > h3 {
+    margin-bottom: 0;
+    width: 300px;
 }
 .fa-info-circle {
     font-size: 11px;
     position: relative;
     top: -8px;
 }
-input[type="text"] {
+input[type="text"], textarea[aria-label="ques"] {
     height: 35px;
     width: 330px;
     border-radius: 5px;
@@ -62,7 +84,6 @@ input[type="text"] {
     margin-top: 10px;
     color: #FF5757;
     font-weight: 900;
-    text-align: center;
     letter-spacing: 2px;
 }
 textarea {
@@ -73,15 +94,67 @@ textarea {
     margin-top: 10px;
     outline: none;
     resize: vertical;
+    padding: 0px 7px 0px 7px;
 }
-input[type="textarea"]:focus, input[type="text"]:focus {
+input[type="textarea"]:focus, input[type="text"]:focus, textarea[aria-label="ques"]:focus {
     border-color: #FF5757;
     transition: .5s;
+}
+input[aria-label="ques"], textarea[aria-label="ques"], .copy-code {
+    border-radius: 15px 3px 3px;
+}
+.copycode input, .copycode textarea {
+    width: 90%;
+}
+.code textarea[aria-label="ques"] {
+    height: initial;
+    padding: 7px;
+}
+.sub-input {
+    height: 30px !important;
+    width: 75% !important;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 15px 3px 3px !important;
+}
+.button_theme_select {
+    display: block;
+    height: 35px !important;
+    width: 82% !important;
+    margin-bottom: 10px;
+    border: 2px solid #646464;
+    border-radius: 15px 3px 3px !important;
+    outline: none;
+    padding: 0 7px;
+    font-family: inherit;
+}
+.button_theme_select * {
+    background-color: white;
+    color: rgb(255, 87, 87);
+    font-size: 15px;
+}
+.code .final-gen-btn, .code .cpy-btn {
+    height: 30px;
+    max-width: max-content;
+    padding: 0 30px;
+    margin-top: 0;
+    font-weight: initial;
+    font-size: 15px;
+    float: left;
+}
+.code .cpy-btn {
+    float: right;
+    margin-right: 20px;
 }
 label {
     padding: 5px;
 }
-.gen-btn, .cpy-btn {
+label[for="ques"] {
+    text-align: left;
+    display: block;
+    padding-bottom: 0;
+}
+.gen-btn, .cpy-btn, .final-gen-btn {
     height: 35px;
     border-radius: 5px;
     border: 0px;
@@ -100,7 +173,7 @@ label {
     width: max-content;
     padding: 20px 50px;
     color: #6c6c6c;
-    border-radius: 7px;
+    border-radius: 10px;
 }
 .sharecode {
     width: fit-content;
@@ -150,6 +223,132 @@ label {
     background: white;
     font-size: 15px;
 }
-.previewcode h4 {
+.preview h4 {
     text-align: left;
+}
+.final-output {
+    display: none;
+}
+.bottom-info {
+    width: 80%;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    font-family: 'Inter Regular';
+}
+.branding-info {
+    display: flex;
+    align-items: center;
+}
+.italic-info {
+    font-size: 200%;
+    margin-right: 10px;
+    color: black;
+}
+.hidden {
+    display: none
+}
+
+/* Live Preview Styles below (copied html/css from tool html stylised for this page) */
+
+.bubble-preview {
+    width: 100%;
+}
+.ques-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.live-preview input, .live-preview textarea {
+    width: 90%;
+}
+.preview-tool-box {
+    padding: 15px 15px 5px;
+    background-color: white;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 20px 20px 0;
+    line-height: 1.35;            
+}
+
+/* For bubble msg */
+
+.preview-bubble-msg {
+    width: 100%;
+    max-width: 300px;
+    min-height: 50px;
+    padding: 15px 15px 10px;
+    font-size: 0.9rem;
+    text-align: left;
+    font-family: "Inter Regular";
+    transform: scale(0.75);
+    word-break: break-all;
+}
+.preview-bubble-txt {
+    display: inline-block;
+    margin: 0 20px 0 0;
+}
+.preview-close-bubble {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    cursor: pointer;
+    font-family: 'Inter Bold';
+    user-select: none;
+    font-size: 15px;
+}
+.preview-tool-img {
+    height: 50px;
+    width: 50px;
+    float: right ;
+    cursor: pointer;
+    transform: scale(0.75);
+}
+
+/* For steps box */
+
+.preview-step-box {
+    padding: 15px 15px 30px;
+    height: max-content;
+    width: 220px;
+    transform: scale(0.75);
+    margin-right: -30px;
+    pointer-events: none;
+    text-align: left;
+    word-break: break-all;
+}
+.preview-step-heading {
+    color: #FF5757;
+    font-family: "Inter Bold";
+    font-size: 12px;
+    margin-top: 0;
+}
+.preview-step-ques {
+    font-family: "Inter Bold";
+    font-size: 14px;
+    color: #222;
+}
+.preview-ques-label {
+    font-size: 15px;
+    margin: 8px auto;
+    display: block;
+    
+}
+.preview-ques-input {
+    width: 90%;
+    border: 1px solid #ccc !important;
+    border-radius: 8px !important;
+    height: 25px !important;
+    background-color: #f9f9f9;
+    margin: 8px 0;
+    display: block;
+}
+.preview-tool-btn {
+    background-color: #FF5757;
+    color: white;
+    font-family: 'Inter Bold';
+    padding: 7px 15px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 50px;
+    cursor: pointer;
 }
