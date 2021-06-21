@@ -37,6 +37,12 @@
                         $(".tool-img").attr("src", "imgs/Tool icon 2.png");
                     }
                 }
+                if (searchParams.has('url')) {
+                    const url = searchParams.get('url');
+                    if (url !== window.location.pathname) {
+                        $("body").css("display", "none");
+                    }
+                }
 
                 // button tool
                 if (searchParams.has('label')) {
@@ -215,7 +221,6 @@
                 // changing frame height from bubble msg to ques part if .desktop is visible
                 if (height !== document.querySelector('.hover-tool').offsetHeight && document.querySelector(".desktop").offsetParent !== null) {
                     height = document.querySelector('.hover-tool').offsetHeight;
-                    console.log('sent height');
                     window.parent.postMessage({
                         frameHeight: height
                     }, '*');
@@ -224,7 +229,6 @@
                 // changing bottom when on mobile (default is 5%)
                 const mobile = document.querySelector(".mobile");
                 const previewStyle = getComputedStyle(mobile);
-                console.log('sent mobile');
                 if (previewStyle.display !== "none") {
                     window.parent.postMessage({
                         previewMobileView: true
@@ -234,7 +238,6 @@
                 // changing height when full view is shown
                 const fullMobile = document.querySelector(".full-view");
                 const fullViewStyle = getComputedStyle(fullMobile);
-                console.log('sent full');
                 if (fullViewStyle.display !== "none") {
                     window.parent.postMessage({
                         fullMobileView: true
@@ -243,7 +246,6 @@
                 
                 const hoverTool = document.querySelector(".hover-tool");
                 const hoverToolStyle = getComputedStyle(hoverTool);
-                console.log('sent hover');
                 if (hoverToolStyle.display !== "none") {
                     window.parent.postMessage({
                         hoverToolVis: true
@@ -262,14 +264,14 @@
             $(".preview").click(() => {
                 $(".full-view").fadeIn(250);
                 $('.preview').css('display', 'none')
-                $('.mobile').css({'height': '100%', "max-height": '100vh'})
+                $('.mobile').css({'height': '100%', "max-height": '92vh'})
                 sendPostMessage();
             });
 
             $(".touch-area").click(() => {
                 $(".full-view").fadeOut(250);
                 $('.preview').css('display', 'block');
-                $('.mobile').css({ 'height': '10%', "max-height": '100px' });
+                $('.mobile').css({ 'height': '10%', "max-height": '55px', "min-height": "45px" });
             });
 
         </script>

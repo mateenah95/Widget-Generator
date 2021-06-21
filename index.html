@@ -39,7 +39,7 @@
 
                         <div class="hover_tool_options" style="margin-top: 10px; margin-left: 30px;">
                             <label for="which_url hidden">Pop up on which url</label>
-                            <input type="text" value="" class="which_url_input sub-input">
+                            <input type="text" value="/" class="which_url_input sub-input">
                         </div>
 
                         <input style="display: inline; width: auto;" type="radio" name="tool" value="button-tool">
@@ -171,24 +171,25 @@
                 let h1 = $(".step-1-heading").val();
                 let h2 = $(".step-2-heading").val();
                 let tool = $("input[name='tool']:checked").val();
+                let url = $(".which_url_input").val();
                 let icon = $("input[name='icon']:checked").val();
                 let label = $(".button-label").val();
                 let theme = $(".button_theme_select").val();
                 // let newtab = $(".new_tab").is(":checked");
                 
-                let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&icon=${icon}`;
+                let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}`;
                 let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
                 
                 let generate;
                 let scriptCode;
 
                 if (tool === "hover-tool") {
-                    generate = `<iframe src="http://127.0.0.1:5500/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 5%; right: 0; left: 0;"></iframe>`;
+                    generate = `<iframe src="http://127.0.0.1:5500/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>`;
                     scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';}};</scr` + `ipt>`
                     }
                 else if (tool === "button-tool") {
                     generate = `<iframe src="http://127.0.0.1:5500/hover.html?${hoverParams}&${buttonParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="max-width: 130px; max-height: 41px; display: inline-block; border: 0px; overflow: hidden;"></iframe>`;
-                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 5%; right: 0; left: 0;");}};</scr` + `ipt>`
+                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;");}};</scr` + `ipt>`
                 }
                 $('#iframe-copy-code').val(generate);
                 $('#script-copy-code').val(scriptCode);
@@ -209,7 +210,11 @@
                     
                     // for previews
                     $(".button-preview").fadeOut("fast");
-                    $(".hover-preview").fadeIn("fast");
+                    $(".hover-preview").fadeIn("fast", () => {
+                        $('html, body').animate({
+                            scrollTop: "450"
+                        }, 500);
+                    });
                 } else {
                     // for sub-inputs
                     $(".button_tool_options").fadeIn('fast');
