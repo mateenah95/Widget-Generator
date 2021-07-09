@@ -60,10 +60,34 @@
                     searchParams.get('theme') === "3" && changeBtnTheme("#fbff00", "#001eff", "white", "black");
                     searchParams.get('theme') === "4" && changeBtnTheme("#09a388", "#ff6b6b", "white", "white");
                 }
+                if (searchParams.has('show')) {
+                    const show = searchParams.get('show')
+                    if (show === '1') {
+                        addEvent(document, "mouseleave", function (e) {
+                            e = e ? e : window.event;
+                            var from = e.relatedTarget || e.toElement;
+                            if (!from || from.nodeName == "HTML") {
+                                $('.hover-tool').removeClass('hidden')
+                            }
+                        });
+                    }
+                    if (show === '2') {
+                        $('.hover-tool').removeClass('hidden')
+                        $('.button-tool').removeClass('hidden')
+                    }
+                }
             });
             $(document).bind("contextmenu", function (e) {
                 return false;
             });
+            function addEvent(obj, evt, fn) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(evt, fn, false);
+                }
+                else if (obj.attachEvent) {
+                    obj.attachEvent("on" + evt, fn);
+                }
+            }
         </script>
     </head>
     <body>
@@ -274,6 +298,25 @@
                 $('.mobile').css({ 'height': '10%', "max-height": '55px', "min-height": "45px" });
             });
 
+        </script>
+        <script type="text/javascript">
+            var addEvent = function(obj, evt, fn) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(evt, fn, false);
+                }
+                else if (obj.attachEvent) {
+                    obj.attachEvent("on" + evt, fn);
+                }
+                };
+
+                addEvent(document, "mouseout", function(event) {
+                event = event ? event : window.event;
+                var from = event.relatedTarget || event.toElement;
+                if ( (!from || from.nodeName == "HTML") && event.clientY <= 100 ) {
+                    $('.button-tool').removeClass('hidden');
+                    $('.hover-tool').removeClass('hidden');
+                }
+            });
         </script>
     </body>
 </html>
