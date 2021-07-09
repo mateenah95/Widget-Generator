@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Widget Generator</title>
+        <link rel="stylesheet" href="button.css">
         <link rel="stylesheet" href="ui.css">
         <script src="https://kit.fontawesome.com/a4f4262069.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -14,10 +15,10 @@
             </div>
             <div class="generator">
                 <div class="head">
-                    <h2>COPYCODE WIDGET GENERATOR</h2>
-                    <div class="desc">
+                    <h2>SLIDE-IN PLUGIN</h2>
+                    <!-- <div class="desc">
                         One of the most friction-free lead collection tool!
-                    </div>
+                    </div> -->
                 </div>
                 <div class="generate">
                     <div class="sharecode">
@@ -31,23 +32,103 @@
                 <div class="clear"></div>
                 <div class="code">
                     <div class="copycode">
-                        <label>Copy and paste this code in your HTML Widget</label>
+                        <p for="Choose_Logo" style="margin-bottom: 0;">Choose Tool Type</p>
+                        <input style="display: inline; width: auto;" type="radio" name="tool" value="hover-tool" checked>
+                        <label for="hover-tool">Display All Time</label>
                         <br>
-                        <textarea class="copy-code" rows="4" cols="100" value=""></textarea>
+
+                        <div class="hover_tool_options" style="margin-top: 10px; margin-left: 30px;">
+                            <label for="which_url hidden">Pop up on which url</label>
+                            <input type="text" value="/" class="which_url_input sub-input">
+                        </div>
+
+                        <input style="display: inline; width: auto;" type="radio" name="tool" value="button-tool">
+                        <label for="button-tool">Use Button</label>
                         <br>
-                        <input type="button" name="copy" value="COPY THE CODE" class="cpy-btn">
-                    </div>
-                    <div class="previewcode">
-                        <div class="sharecode">
-                            <h4>Preview:</h4>
-                            <div class="code-cont">
-                                <input type="text" class="share-text" name="share-code" value="" disabled>
-                                <input type="button" name="copy" value="COPY" class="share-btn">
+                        
+                        <div class="hidden button_tool_options" style="margin-top: 10px; margin-left: 30px;">
+                            <label for="button_label">Button Label</label>
+                            <input type="text" value="" class="button-label sub-input" maxlength="15">
+                            <label for="button_theme">Button Theme</label>
+                            <select name="button_theme" class="button_theme_select">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <!-- <input type="checkbox" name="new_tab" class="new_tab" checked style="width: auto;">
+                            <label for="new_tab">New Tab?</label> -->
+                        </div>
+                            <label for="ques">Bubble Text Message</label>
+                            <input type="text" name="bubble-text-msg" class="bubble-text-msg" aria-label="ques" />
+                            <br>
+                            <p for="Choose_Logo" style="margin-bottom: 0;">Choose Logo Type</p>
+                            <input style="display: inline; width: auto;" type="radio" name="icon" value="icon-1" checked>
+                            <label for="icon-1">Revenue Intentional Script</label>
+                            <br>
+                            <input style="display: inline; width: auto;" type="radio" name="icon" value="icon-2">
+                            <label for="icon-2">Saving Intentional Script</label>
+                            <br><br>
+                            <label for="ques">Step 1 Heading Text</label>
+                            <textarea class="step-1-heading" rows="3" cols="60" value="" aria-label="ques"></textarea>
+                            <br><br>
+                            <label for="ques">Step 2 Heading Text</label>
+                            <textarea class="step-2-heading" rows="3" cols="60" value="" aria-label="ques"></textarea>
+                        <br><br>
+                        <input type="button" value="Generate Code" class="final-gen-btn">
+                        <br><br>
+                        <div class="final-output">
+                            <!-- code textarea and copy btn start -->
+                            <textarea id="iframe-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
+                            <br>
+                            <input type="button" name="copy" value="COPY HTML" class="cpy-btn" id="iframe-cpy-btn">
+                            <br><br>
+                            <textarea id="script-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
+                            <br>
+                            <input type="button" name="copy" value="COPY SCRIPT" class="cpy-btn" id="script-cpy-btn">
+                            <!-- code textarea and copy btn end -->
+                            <div class="bottom-info">
+                                <p>Place script code at the bottom of your body tag.</p>
+                                <p><strong style="color: black; margin-bottom: 0;">Note: </strong>Please make sure your website has the meta viewport tag.</p>
+                                <div class="branding-info">
+                                    <p class="italic-info"><i class="fas fa-info"></i></p>
+                                    <p>Conwersion's branding appears because, this script is not from a premium account.</p>
+                                </div>
                             </div>
-                            <div class="info">
-                                You will be redirected to <a href="https://conwersion.com">conwersion.com</a> to use this script!
-                                <br>
-                                <a href="priv-pol.html">Click here</a> for Privacy Policy
+                        </div>
+                    </div>
+                    <div class="live-preview">
+                        <h3>Preview</h3>
+                        <div class="hover-preview">
+                            <div class="bubble-preview">
+                                <div class="preview-bubble-msg preview-tool-box">
+                                    <span class="preview-close-bubble">x</span>
+                                    <p class="preview-bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</span>
+                                </div>
+                                <div style="height: 50px; width: 300px; margin-top: -15px;">
+                                    <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" />
+                                </div>
+                            </div>
+                            <div class="ques-preview">
+                                <div id="step-1" class="preview-tool-box preview-step-box">
+                                    <span class="preview-close-bubble">x</span>
+                                    <p class="preview-step-heading">STEP 1 of 2</p>
+                                    <p class="preview-step-ques preview-step-1-heading">Tell us more about yourself to create a personalized script</p>
+                                    <label class="preview-ques-label">Question 1</label>
+                                    <input type="text" value="" class="preview-ques-input" disabled>
+                                    <label class="preview-ques-label">Question 2</label>
+                                    <input type="text" value="" class="preview-ques-input" disabled>
+                                    <br>
+                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 95%">
+                                    <p style="color: #ccc; font-size: 13px; margin-bottom: 0;">Powered by </p>
+                                    <img src="./imgs/cs_logo.png" style="width: 100px; height: 25px" />
+                                </div>
+                                <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" style="margin-right: -30px;" />
+                            </div>
+                        </div>
+                        <div class="button-preview hidden">
+                            <div class="btn-tool-wrapper" style="margin-top: 100px;">
+                                <a class="btn-tool" style="cursor: pointer; user-select: none;"><span class="btn-tool-text">Use Script</span></a>
                             </div>
                         </div>
                     </div>
@@ -55,6 +136,13 @@
             </div>
         </div>
         <script type="text/javascript">
+            function copyToClipboard(id) {
+                var copyText = document.getElementById(id);
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+
+                document.execCommand("copy");
+            }
             $(document).bind("contextmenu",function(e){
                 return false;
             });
@@ -67,35 +155,123 @@
                 }
             });
             $(".gen-btn").click(function() {
-                var sh_code = $(".share-code").val();
-                var generate = '<iframe src="https://tools.conwersion.com/sharecode.html?code='+ sh_code +'" width="470px" height="120px" style="border: 0px; overflow: hidden;"></iframe>';
-                $('.copy-code').val(generate);
                 $('.code').slideDown(500, "linear");
-                var val = $('.share-code').val();
-                $('.share-text').val(val);
+                $('.code').css('display', 'flex');
                 $('html, body').animate({
-                    scrollTop: $('body').height()
+                    scrollTop: "450"
                 }, 1000);
             });
-            $(".cpy-btn").click(function() {
-                function copyToClipboard() {
-                    var copyText = document.getElementsByClassName("copy-code")[0];
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999);
+            $(".final-gen-btn").click(function() {
+                $(".final-output").slideDown(300, "linear");
+                $('html, body').animate({
+                    scrollTop: $(".final-output").offset().top
+                }, 750);
 
-                    document.execCommand("copy");
+                let bubble = $(".bubble-text-msg").val();
+                let h1 = $(".step-1-heading").val();
+                let h2 = $(".step-2-heading").val();
+                let tool = $("input[name='tool']:checked").val();
+                let url = $(".which_url_input").val();
+                let icon = $("input[name='icon']:checked").val();
+                let label = $(".button-label").val();
+                let theme = $(".button_theme_select").val();
+                // let newtab = $(".new_tab").is(":checked");
+                
+                let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}`;
+                let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
+                
+                let generate;
+                let scriptCode;
+
+                if (tool === "hover-tool") {
+                    generate = `<iframe src="http://127.0.0.1:5500/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>`;
+                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';}};</scr` + `ipt>`
+                    }
+                else if (tool === "button-tool") {
+                    generate = `<iframe src="http://127.0.0.1:5500/hover.html?${hoverParams}&${buttonParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="max-width: 130px; max-height: 41px; display: inline-block; border: 0px; overflow: hidden;"></iframe>`;
+                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;");}};</scr` + `ipt>`
                 }
-                copyToClipboard();
+                $('#iframe-copy-code').val(generate);
+                $('#script-copy-code').val(scriptCode);
+            })
+            $("#iframe-cpy-btn").click(function() {
+                copyToClipboard("iframe-copy-code");
             });
-            $('.share-btn').click(function() {
-                function copyToClipboard() {
-                    var copyText = document.getElementsByClassName("share-text")[0];
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999);
-
-                    document.execCommand("copy");
+            $("#script-cpy-btn").click(function() {
+                copyToClipboard("script-copy-code");
+            });
+            $("input[type='radio']").click(() => {
+                $(".final-output").css("display", "none");
+                var tool = $("input[name='tool']:checked").val();
+                if (tool === "hover-tool") {
+                    // for sub-inputs
+                    $(".hover_tool_options").fadeIn('fast');
+                    $(".button_tool_options").fadeOut('fast');
+                    
+                    // for previews
+                    $(".button-preview").fadeOut("fast");
+                    $(".hover-preview").fadeIn("fast", () => {
+                        $('html, body').animate({
+                            scrollTop: "450"
+                        }, 500);
+                    });
+                } else {
+                    // for sub-inputs
+                    $(".button_tool_options").fadeIn('fast');
+                    $(".hover_tool_options").fadeOut('fast');
+                    // for previews
+                    $(".hover-preview").fadeOut("fast");
+                    $(".button-preview").fadeIn("fast", () => {
+                        $('html, body').animate({
+                            scrollTop: "500"
+                        }, 500);
+                    });
                 }
-                copyToClipboard();
+            });
+
+            // for live changes in hover preview
+            $(".bubble-text-msg").on("keydown keyup keypress change", () => {
+                var bubble = $(".bubble-text-msg").val();
+                if (bubble.trim() === "") {
+                    $(".preview-bubble-txt").text("Would you like to get personalised script to convert your group members to paying customers?");
+                } else {
+                    $(".preview-bubble-txt").text(bubble);
+                }
+            });
+            $(".step-1-heading").on("keydown keyup keypress change", () => {
+                var h1 = $(".step-1-heading").val();
+                $(".preview-step-heading").text("STEP 1 of 2");
+                $(".preview-step-1-heading").text(h1);
+            });
+            $(".step-2-heading").on("keydown keyup keypress change", () => {
+                var h2 = $(".step-2-heading").val();
+                $(".preview-step-1-heading").text(h2);
+                $(".preview-step-heading").text("STEP 2 of 2");
+            });
+
+            // for live changes in button preview
+
+            const changeBtnTheme = (first, second, text, hover, border) => {
+                $("body").get(0).style.setProperty("--first", first);
+                $("body").get(0).style.setProperty("--second", second);
+                $("body").get(0).style.setProperty("--text", text);
+                $("body").get(0).style.setProperty("--hover", hover);
+                $(".btn-tool").css("border", border);
+            };
+
+            $(".button-label").on("keydown keyup keypress change", () => {
+                var label = $(".button-label").val();
+                if (label.trim() === "") {
+                    label = "Click here!";
+                } 
+                $(".btn-tool-text").text(label);
+            });
+            $(".button_theme_select").change(() => {
+                var theme = $(".button_theme_select").val();
+                theme === "1" && changeBtnTheme("#474747", "#ff6b6b", "white", "white", "0");
+                theme === "2" && changeBtnTheme("black", "white", "black", "white", "1px solid black");
+                theme === "3" && changeBtnTheme("#fbff00", "#001eff", "white", "black", "0");
+                theme === "4" && changeBtnTheme("#09a388", "#ff6b6b", "white", "white", "0")
             });
         </script>
     </body>
