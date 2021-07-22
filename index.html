@@ -33,6 +33,7 @@
                 <div class="code">
                     <div class="copycode">
                         <p for="Choose_Logo" style="margin-bottom: 0;">Choose Tool Type</p>
+                        <br >
                         <input style="display: inline; width: auto;" type="radio" name="tool" value="hover-tool" checked>
                         <label for="hover-tool">Display All Time</label>
                         <br>
@@ -63,11 +64,12 @@
                             <input type="text" name="bubble-text-msg" class="bubble-text-msg" aria-label="ques" />
                             <br>
                             <p for="Choose_Logo" style="margin-bottom: 0;">Choose Logo Type</p>
+                            <br >
                             <input style="display: inline; width: auto;" type="radio" name="icon" value="icon-1" checked>
-                            <label for="icon-1">Revenue Intentional Script</label>
+                            <label for="icon-1">Revenue Generation</label>
                             <br>
                             <input style="display: inline; width: auto;" type="radio" name="icon" value="icon-2">
-                            <label for="icon-2">Saving Intentional Script</label>
+                            <label for="icon-2">Budget Saving</label>
                             <br><br>
                             <label for="ques">Step 1 Heading Text</label>
                             <textarea class="step-1-heading" rows="3" cols="60" value="" aria-label="ques"></textarea>
@@ -102,16 +104,17 @@
                         <div class="hover-preview">
                             <div class="bubble-preview">
                                 <div class="preview-bubble-msg preview-tool-box">
-                                    <span class="preview-close-bubble">x</span>
-                                    <p class="preview-bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</span>
+                                    <p class="preview-bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</p>
+                                    <br>
+                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 15px 0px;">
                                 </div>
                                 <div style="height: 50px; width: 300px; margin-top: -15px;">
-                                    <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" />
+                                    <img id='rev-gen-icon' src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" />
+                                    <img id='saving-icon' hidden src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" />
                                 </div>
                             </div>
                             <div class="ques-preview">
                                 <div id="step-1" class="preview-tool-box preview-step-box">
-                                    <span class="preview-close-bubble">x</span>
                                     <p class="preview-step-heading">STEP 1 of 2</p>
                                     <p class="preview-step-ques preview-step-1-heading">Tell us more about yourself to create a personalized script</p>
                                     <label class="preview-ques-label">Question 1</label>
@@ -119,7 +122,8 @@
                                     <label class="preview-ques-label">Question 2</label>
                                     <input type="text" value="" class="preview-ques-input" disabled>
                                     <br>
-                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 95%">
+                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 10px 0px;">
+                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 10px 0px;">
                                     <p style="color: #ccc; font-size: 13px; margin-bottom: 0;">Powered by </p>
                                     <img src="./imgs/cs_logo.png" style="width: 100px; height: 25px" />
                                 </div>
@@ -215,6 +219,13 @@
                             scrollTop: "450"
                         }, 500);
                     });
+                    var icon = $("input[name='icon']:checked").val();
+                    if (icon === 'icon-1') {
+                        $('.preview-tool-img').attr('src','imgs/Tool icon 1.png');
+                    }
+                    if (icon === 'icon-2') {
+                        $('.preview-tool-img').attr('src','imgs/Tool icon 2.png');
+                    }
                 } else {
                     // for sub-inputs
                     $(".button_tool_options").fadeIn('fast');

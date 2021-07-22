@@ -285,7 +285,7 @@ label[for="ques"] {
 }
 .preview-bubble-txt {
     display: inline-block;
-    margin: 0 20px 0 0;
+    margin: 0 0 0 0;
 }
 .preview-close-bubble {
     position: absolute;
@@ -321,6 +321,7 @@ label[for="ques"] {
     font-family: "Inter Bold";
     font-size: 12px;
     margin-top: 0;
+    text-align: center;
 }
 .preview-step-ques {
     font-family: "Inter Bold";
