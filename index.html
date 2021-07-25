@@ -83,11 +83,11 @@
                             <!-- code textarea and copy btn start -->
                             <textarea id="iframe-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
                             <br>
-                            <input type="button" name="copy" value="COPY HTML" class="cpy-btn" id="iframe-cpy-btn">
+                            <input type="button" name="copy" value="COPY" class="cpy-btn" id="iframe-cpy-btn">
                             <br><br>
                             <textarea id="script-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
                             <br>
-                            <input type="button" name="copy" value="COPY SCRIPT" class="cpy-btn" id="script-cpy-btn">
+                            <input type="button" name="copy" value="COPY" class="cpy-btn" id="script-cpy-btn">
                             <!-- code textarea and copy btn end -->
                             <div class="bottom-info">
                                 <p>Place script code at the bottom of your body tag.</p>
@@ -122,10 +122,10 @@
                                     <label class="preview-ques-label">Question 2</label>
                                     <input type="text" value="" class="preview-ques-input" disabled>
                                     <br>
-                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 10px 0px;">
-                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 10px 0px;">
-                                    <p style="color: #ccc; font-size: 13px; margin-bottom: 0;">Powered by </p>
-                                    <img src="./imgs/cs_logo.png" style="width: 100px; height: 25px" />
+                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white; border: 2.5px solid red;">
+                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white; border: 2.5px solid red;">
+                                    <p style="color: #ccc; font-size: 9px; margin-bottom: 0;">Powered by </p>
+                                    <a href='http://conwersion.com'><img id='cs-logo' src="./imgs/cs_logo.png" style="width: 100px; height: 25px" /></a>
                                 </div>
                                 <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" style="margin-right: -30px;" />
                             </div>
@@ -140,6 +140,9 @@
             </div>
         </div>
         <script type="text/javascript">
+            document.getElementById('cs-logo').addEventListener('click', () => {
+                window.open('http://conwersion.com', '_blank')
+            })
             function copyToClipboard(id) {
                 var copyText = document.getElementById(id);
                 copyText.select();
