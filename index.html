@@ -61,7 +61,7 @@
                             <label for="new_tab">New Tab?</label> -->
                         </div>
                             <label for="ques">Bubble Text Message</label>
-                            <input type="text" name="bubble-text-msg" class="bubble-text-msg" aria-label="ques" />
+                            <input type="text" name="bubble-text-msg" class="bubble-text-msg" aria-label="ques" value='Would you like to get personalised script to convert your group members to paying customers?'/>
                             <br>
                             <p for="Choose_Logo" style="margin-bottom: 0;">Choose Logo Type</p>
                             <br >
@@ -70,12 +70,25 @@
                             <br>
                             <input style="display: inline; width: auto;" type="radio" name="icon" value="icon-2">
                             <label for="icon-2">Budget Saving</label>
-                            <br><br>
+                            <br>
+                            <div>
+                                <p for="Choose_Branding" style="margin-bottom: 0;">Hide Branding?</p>
+                                <br >
+                                <input id='hide-branding' style="display: inline; width: auto;" type="radio" name="branding" value="yes">
+                                <label for="hide-branding">Yes</label>
+                                <br>
+                                <input id='show-branding' style="display: inline; width: auto;" type="radio" name="branding" value="no" checked>
+                                <label for="show-branding">No</label>
+                            </div>
+                            <br>
                             <label for="ques">Step 1 Heading Text</label>
-                            <textarea class="step-1-heading" rows="3" cols="60" value="" aria-label="ques"></textarea>
+                            <textarea class="step-1-heading" rows="3" cols="60" value="" aria-label="ques">Tell us more about yourself to create a personalized script.</textarea>
                             <br><br>
                             <label for="ques">Step 2 Heading Text</label>
-                            <textarea class="step-2-heading" rows="3" cols="60" value="" aria-label="ques"></textarea>
+                            <textarea class="step-2-heading" rows="3" cols="60" value="" aria-label="ques">Where should we send your personalized script?</textarea>
+                            <br><br>
+                            <label for="ques">Close Button Redirect Destination</label>
+                            <input id='close-redirect-destination' class="step-2-heading" type="text" value="" aria-label="ques">
                         <br><br>
                         <input type="button" value="Generate Code" class="final-gen-btn">
                         <br><br>
@@ -122,14 +135,12 @@
                                     <label class="preview-ques-label" style="margin: 0px;">Question 2</label>
                                     <input type="text" value="" class="preview-ques-input" style="margin: 0px;" disabled>
                                     <br>
-                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white; border: 2.5px solid red;">
-                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white; border: 2.5px solid red;">
-                                    <div style="display: flex; align-items: center;">
-                                        <input id='hide-branding' style="width: 25%;" type='checkbox'>
-                                        <p style="width: 75%;" class="preview-step-ques preview-step-1-heading">Hide Branding?</p>
+                                    <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: white; background: red; border: 2.5px solid red;">
+                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white;">
+                                    <div id='branding'>
+                                        <p style="color: #ccc; font-size: 9px; margin-bottom: 0;">Powered by </p>
+                                        <a href='http://conwersion.com'><img id='cs-logo' src="./imgs/cs_logo.png" style="width: 100px; height: 25px" /></a>
                                     </div>
-                                    <p style="color: #ccc; font-size: 9px; margin-bottom: 0;">Powered by </p>
-                                    <a href='http://conwersion.com'><img id='cs-logo' src="./imgs/cs_logo.png" style="width: 100px; height: 25px" /></a>
                                 </div>
                                 <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="preview-tool-img" style="margin-right: -30px;" />
                             </div>
@@ -172,38 +183,46 @@
                     scrollTop: "450"
                 }, 1000);
             });
+            $("#hide-branding").click(function (){
+                $("#branding").addClass('hidden');
+            });
+            $("#show-branding").click(function (){
+                $("#branding").removeClass('hidden');
+            });
             $(".final-gen-btn").click(function() {
                 $(".final-output").slideDown(300, "linear");
-                $('html, body').animate({
-                    scrollTop: $(".final-output").offset().top
-                }, 750);
+                        $('html, body').animate({
+                            scrollTop: $(".final-output").offset().top
+                        }, 750);
 
-                let bubble = $(".bubble-text-msg").val();
-                let h1 = $(".step-1-heading").val();
-                let h2 = $(".step-2-heading").val();
-                let tool = $("input[name='tool']:checked").val();
-                let url = $(".which_url_input").val();
-                let icon = $("input[name='icon']:checked").val();
-                let label = $(".button-label").val();
-                let theme = $(".button_theme_select").val();
-                // let newtab = $(".new_tab").is(":checked");
-                
-                let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}`;
-                let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
-                
-                let generate;
-                let scriptCode;
+                        let bubble = $(".bubble-text-msg").val();
+                        let h1 = $(".step-1-heading").val();
+                        let h2 = $(".step-2-heading").val();
+                        let tool = $("input[name='tool']:checked").val();
+                        let url = $(".which_url_input").val();
+                        let icon = $("input[name='icon']:checked").val();
+                        let label = $(".button-label").val();
+                        let theme = $(".button_theme_select").val();
+                        let closeRedirectDestination = $("#close-redirect-destination").val();
+                        let branding = $("input[name='branding']:checked").val();
+                        let sharecode = $('.share-code').val();
 
-                if (tool === "hover-tool") {
-                    generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>`;
-                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';}};</scr` + `ipt>`
-                    }
-                else if (tool === "button-tool") {
-                    generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}&${buttonParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="max-width: 130px; max-height: 41px; display: inline-block; border: 0px; overflow: hidden;"></iframe>`;
-                    scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;");}};</scr` + `ipt>`
-                }
-                $('#iframe-copy-code').val(generate);
-                $('#script-copy-code').val(scriptCode);
+                        let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}&closeRedirectDestination=${closeRedirectDestination}&branding=${branding}&sharecode=${sharecode}`;
+                        let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
+                        
+                        let generate;
+                        let scriptCode;
+
+                        if (tool === "hover-tool") {
+                            generate = `<iframe src="file:///Users/mateen/Desktop/Conwersion/Widget-Generator/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" width="100%" height="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>`;
+                            scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = 100 + '%';}};</scr` + `ipt>`
+                            }
+                        else if (tool === "button-tool") {
+                            generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}&${buttonParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="max-width: 130px; max-height: 41px; display: inline-block; border: 0px; overflow: hidden;"></iframe>`;
+                            scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;");}};</scr` + `ipt>`
+                        }
+                        $('#iframe-copy-code').val(generate);
+                        $('#script-copy-code').val(scriptCode);
             })
             $("#iframe-cpy-btn").click(function() {
                 copyToClipboard("iframe-copy-code");

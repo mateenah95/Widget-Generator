@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Test Page</title>
+  </head>
+  <body>
+      <h1>Test Page</h1>
+      <iframe src="file:///Users/mateen/Desktop/Conwersion/Widget-Generator/hover.html?bubble=Hi%20Mateen&h1=Testing%20Page%20%231&h2=Testing%20Page%20%232&tool=hover-tool&url=/&icon=icon-2&closeRedirectDestination=http://samsung.com&branding=yes&sharecode=2brgTBT2gGFWLkbNZxysXk" id="conwersion_tool_iframe" frameborder="0" width="100%" height="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>
+      <script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = 100 + '%';}};</script>
+  </body>
+</html>

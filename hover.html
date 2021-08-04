@@ -41,6 +41,7 @@
                     const url = searchParams.get('url');
                     console.log('URL > ', url);
                     console.log('Pathname > ', window.location.pathname);
+                    console.log('Parent URL > ', parent.document.location.pathname)
                     //if (url !== window.location.pathname) {
                     //    $("body").css("display", "none");
                     //}
@@ -94,41 +95,42 @@
     </head>
     <body>
         <div>
-            <div class="hover-tool">
+            <div class="hover-tool hidden">
                 <div class="desktop tool-form">
                     <div class="bubble-msg tool-box">
-                        <span class="close-bubble">x</span>
-                        <p class="bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</span>
+                        <p class="bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</p>
+                        <br>
+                        <input type="button" value="Close" class="preview-tool-btn close-button" style="width: 100%; margin: 15px 0px;">
                     </div>
-                    <div id="step-1" class="tool-box step-box">
-                        <span class="close-bubble">x</span>
+                    <div id="step-1" class="tool-box step-box text-center">
                         <p class="step-heading">STEP 1 of 2</p>
                         <p class="step-ques step-1-heading">Tell us more about yourself to create a personalized script</p>
-                        <label for="ques-1" class="ques-label">Question 1</label>
-                        <input id="step-1-ans-1" type="text" value="" class="ques-input">
-                        <label for="ques-1" class="ques-label">Question 2</label>
-                        <input id="step-1-ans-2" type="text" value="" class="ques-input">
+                        <div id='questions-container' style="height: 200px; overflow: scroll;">
+                        </div>
                         <br>
                         <input type="submit" value="Confirm" class="next-step-btn tool-btn">
-                        <p class="powered-by-text">Powered by </p>
-                        <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        <div class='branding'>
+                            <p class="powered-by-text">Powered by </p>
+                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        </div>
                     </div>
-                    <div id="step-2" class="tool-box step-box">
-                        <span class="close-bubble">x</span>
+                    <div id="step-2" class="tool-box step-box text-center">
                         <p class="step-heading">STEP 2 of 2</p>
                         <p class="step-ques step-2-heading">Tell us more about yourself to create a personalized script</p>
-                        <label for="ques-1" class="ques-label">Question 1</label>
-                        <input id="step-2-ans-1" type="text" value="" class="ques-input">
-                        <label for="ques-1" class="ques-label">Question 2</label>
-                        <input id="step-2-ans-2" type="text" value="" class="ques-input">
+                        <label for="ques-name" class="ques-label">Name</label>
+                        <input id="name-input" type="text" value="" class="ques-input">
+                        <label for="ques-email" class="ques-label">Email</label>
+                        <input id="email-input" type="text" value="" class="ques-input">
                         <br>
                         <input type="submit" value="Confirm" class="submit-btn tool-btn">
-                        <p class="powered-by-text">Powered by </p>
-                        <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        <div class='branding'>
+                            <p class="powered-by-text">Powered by </p>
+                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                        </div>
                     </div>
                     <div id="confirmation-box" class="tool-box step-box">
                         <p>Thanks for adding script!</p>
-                        <p class="close-success-box close-box">Close</p>
+                        <a href='#' class="close-success-box close-box">Close</a>
                     </div>
                 </div>
                 <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="tool-img desktop" />
@@ -151,8 +153,10 @@
                             <input id="mobile-step-1-ans-2" type="text" value="" class="ques-input">
                             <br>
                             <input type="submit" value="Confirm" class="mobile-next-step-btn tool-btn">
-                            <p class="powered-by-text">Powered by </p>
-                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                            <div class='branding'>
+                                <p class="powered-by-text">Powered by </p>
+                                <img src="./imgs/cs_logo.png" class="cs_logo" />
+                            </div>
                         </div>
                         <div id="mobile-step-2" class="tool-box step-box">
                             <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 2 of 2</p>
@@ -163,8 +167,10 @@
                             <input id="mobile-step-2-ans-2" type="text" value="" class="ques-input">
                             <br>
                             <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn">
-                            <p class="powered-by-text">Powered by </p>
-                            <img src="./imgs/cs_logo.png" class="cs_logo" />
+                            <div class='branding'>
+                                <p class="powered-by-text">Powered by </p>
+                                <img src="./imgs/cs_logo.png" class="cs_logo" />
+                            </div>
                         </div>
                         <div id="mobile-confirmation-box" class="tool-box step-box">
                             <p>Thanks for adding script!</p>
@@ -173,13 +179,14 @@
                     </div>
                 </div>
             </div>
-            <div class="button-tool">
+            <div class="button-tool hidden">
                 <div class="btn-tool-wrapper">
                     <button class="btn-tool"><span class="btn-tool-text">Use Script</span></button>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
+        let pageState = 1;
             $(".btn-tool").click(() => {
                 $(".btn-tool").css("display", "none");
                 $(".hover-tool").css("display", "block");
@@ -189,12 +196,50 @@
                 // show bubble
                 $('.tool-form').css({ opacity: 0, visibility: "visible" }).animate({ opacity: 1 });
             })
-
             $(".close-bubble").click(() => {
                 // hide bubble
                 $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
             })
+            $(".close-button").click(() => {
+                // hide bubble
+                $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
+            })
+            // close button redirection
+            let searchParams = new URLSearchParams(window.location.search);
+            if(searchParams.has('closeRedirectDestination') && searchParams.get('closeRedirectDestination') !== ''){
+                $(".close-success-box").attr('target', '_blank');
+                $(".close-success-box").attr('href', searchParams.get('closeRedirectDestination'));
+            }
+            if(searchParams.has('branding')){
+                if(searchParams.get('branding') === 'yes'){
+                    $('.branding').hide();
+                }
+            }
+            if(searchParams.has('sharecode')){
+                let questions = searchParams.get('sharecode');
+                $.ajax({  
+                    url: `http://localhost/scripts/questions/${'2brgTBT2gGFWLkbNZxysXk'}`,
+                    type: 'GET',
+                    success: function (resp) {
+                        let questions = resp;
+                        let qList = [];
+                        let i = 0;
+                        let html_string = ``;
+                        for(i=0;i<questions.length;i++){
+                            html_string = html_string + `
+                                <label for="ques-${i}" class="ques-label">${questions[i].question}</label>
+                                <input id="step-${i}-ans-${i}" type="text" value="" class="ques-input">
+                            `
 
+                        }
+                        $('#questions-container').html(html_string);
+                    },
+                    error: function (e) {
+                        console.log(e)
+                    }
+                })
+                
+            }
             $(".close-success-box").click(() => {
                 // hide entire tool
                 $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
@@ -315,8 +360,8 @@
                 event = event ? event : window.event;
                 var from = event.relatedTarget || event.toElement;
                 if ( (!from || from.nodeName == "HTML") && event.clientY <= 100 ) {
-                    $('.button-tool').removeClass('hidden');
-                    $('.hover-tool').removeClass('hidden');
+                    $('.button-tool').removeClass('');
+                    $('.hover-tool').removeClass('');
                 }
             });
         </script>

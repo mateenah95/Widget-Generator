@@ -101,6 +101,7 @@ body {
     font-family: "Inter Bold";
     font-size: 13px;
     margin-top: 15px;
+    text-align: center;
 }
 
 .step-ques {
@@ -234,4 +235,15 @@ body {
     .desktop {
         display: none;
     }
+}
+
+.preview-tool-btn {
+    background-color: #FF5757;
+    color: white;
+    font-family: 'Inter Bold';
+    padding: 7px 15px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 50px;
+    cursor: pointer;
 }
