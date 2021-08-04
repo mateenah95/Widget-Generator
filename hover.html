@@ -108,7 +108,8 @@
                         <div id='questions-container' style="height: 200px; overflow: scroll;">
                         </div>
                         <br>
-                        <input type="submit" value="Confirm" class="next-step-btn tool-btn">
+                        <input type="submit" value="Confirm" class="next-step-btn tool-btn" style='margin-bottom: 10px;'>
+                        <input type="button" value="Close" class="preview-tool-btn second-close-bubble" style="width: 100%; margin: 5px 0px; color: red; background: white;">
                         <div class='branding'>
                             <p class="powered-by-text">Powered by </p>
                             <img src="./imgs/cs_logo.png" class="cs_logo" />
@@ -122,7 +123,8 @@
                         <label for="ques-email" class="ques-label">Email</label>
                         <input id="email-input" type="text" value="" class="ques-input">
                         <br>
-                        <input type="submit" value="Confirm" class="submit-btn tool-btn">
+                        <input type="submit" value="Confirm" class="submit-btn tool-btn" style='margin-bottom: 10px;'>
+                        <input type="button" value="Close" class="preview-tool-btn second-close-bubble" style="width: 100%; margin: 5px 0px; color: red; background: white;">
                         <div class='branding'>
                             <p class="powered-by-text">Powered by </p>
                             <img src="./imgs/cs_logo.png" class="cs_logo" />
@@ -196,7 +198,7 @@
                 // show bubble
                 $('.tool-form').css({ opacity: 0, visibility: "visible" }).animate({ opacity: 1 });
             })
-            $(".close-bubble").click(() => {
+            $(".close-bubble, .second-close-bubble").click(() => {
                 // hide bubble
                 $('.tool-form').css({ opacity: 0, visibility: "hidden" }).animate({ opacity: 0 });
             })
