@@ -218,9 +218,9 @@
                 }
             }
             if(searchParams.has('sharecode')){
-                let questions = searchParams.get('sharecode');
+                let sharecode = searchParams.get('sharecode');
                 $.ajax({  
-                    url: `http://localhost/scripts/questions/${'2brgTBT2gGFWLkbNZxysXk'}`,
+                    url: `http://api.conwersion.com/scripts/questions/${sharecode}`,
                     type: 'GET',
                     success: function (resp) {
                         let questions = resp;
