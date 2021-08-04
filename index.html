@@ -193,6 +193,7 @@
                 let sharecode = $('.share-code').val();
                 $.ajax({  
                     url: `http://api.conwersion.com/scripts/questions/${sharecode}`,
+                    dataType: "jsonp",
                     type: 'GET',
                     success: function (resp) {
                         let questions = resp;
