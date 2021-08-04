@@ -222,7 +222,9 @@
                 $.ajax({  
                     url: `https://api.conwersion.com/scripts/questions/${sharecode}`,
                     type: 'GET',
-                    dataType: "jsonp",
+                    dataType: "json",
+                    crossDomain: true,
+                    format: "json",
                     success: function (resp) {
                         let questions = resp;
                         let qList = [];
