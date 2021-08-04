@@ -190,21 +190,7 @@
                 $("#branding").removeClass('hidden');
             });
             $(".final-gen-btn").click(function() {
-                let sharecode = $('.share-code').val();
-                $.ajax({  
-                    url: `https://api.conwersion.com/scripts/questions/${sharecode}`,
-                    dataType: "jsonp",
-                    type: 'GET',
-                    success: function (resp) {
-                        let questions = resp;
-                        let qList = [];
-                        let i = 0;
-
-                        for(i=0;i<questions.length;i++){
-                            qList.push(encodeURIComponent(questions[i].question));
-                        }
-
-                        $(".final-output").slideDown(300, "linear");
+                $(".final-output").slideDown(300, "linear");
                         $('html, body').animate({
                             scrollTop: $(".final-output").offset().top
                         }, 750);
@@ -219,9 +205,9 @@
                         let theme = $(".button_theme_select").val();
                         let closeRedirectDestination = $("#close-redirect-destination").val();
                         let branding = $("input[name='branding']:checked").val();
-                        let stringifiedQuestionList = JSON.stringify(qList);
+                        let sharecode = $('.share-code').val();
 
-                        let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}&closeRedirectDestination=${closeRedirectDestination}&branding=${branding}&sharecode=${stringifiedQuestionList}`;
+                        let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}&closeRedirectDestination=${closeRedirectDestination}&branding=${branding}&sharecode=${sharecode}`;
                         let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
                         
                         let generate;
@@ -237,12 +223,6 @@
                         }
                         $('#iframe-copy-code').val(generate);
                         $('#script-copy-code').val(scriptCode);
-
-                    },
-                    error: function (e) {
-                        console.log(e)
-                    }
-                })
             })
             $("#iframe-cpy-btn").click(function() {
                 copyToClipboard("iframe-copy-code");
