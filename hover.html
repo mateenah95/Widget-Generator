@@ -149,10 +149,8 @@
                         <div id="mobile-step-1" class="tool-box step-box">
                             <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 1 of 2</p>
                             <p class="step-ques step-1-heading" style="font-size: 1.3rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
-                            <label for="ques-1" class="ques-label">Question 1</label>
-                            <input id="mobile-step-1-ans-1" type="text" value="" class="ques-input">
-                            <label for="ques-1" class="ques-label">Question 2</label>
-                            <input id="mobile-step-1-ans-2" type="text" value="" class="ques-input">
+                            <div id='questions-container-mobile' style="height: 100%; overflow: scroll;">
+                            </div>
                             <br>
                             <input type="submit" value="Confirm" class="mobile-next-step-btn tool-btn">
                             <div class='branding'>
@@ -163,10 +161,10 @@
                         <div id="mobile-step-2" class="tool-box step-box">
                             <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 2 of 2</p>
                             <p class="step-ques step-2-heading" style="font-size: 1.3rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
-                            <label for="ques-1" class="ques-label">Question 1</label>
-                            <input id="mobile-step-2-ans-1" type="text" value="" class="ques-input">
-                            <label for="ques-1" class="ques-label">Question 2</label>
-                            <input id="mobile-step-2-ans-2" type="text" value="" class="ques-input">
+                            <label for="ques-name" class="ques-label">Name</label>
+                            <input id="name-input" type="text" value="" class="ques-input">
+                            <label for="ques-email" class="ques-label">Email</label>
+                            <input id="email-input" type="text" value="" class="ques-input">
                             <br>
                             <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn">
                             <div class='branding'>
@@ -209,8 +207,8 @@
             // close button redirection
             let searchParams = new URLSearchParams(window.location.search);
             if(searchParams.has('closeRedirectDestination') && searchParams.get('closeRedirectDestination') !== ''){
-                $(".close-success-box").attr('target', '_blank');
-                $(".close-success-box").attr('href', searchParams.get('closeRedirectDestination'));
+                $(".close-success-box, .mobile-close-success-box").attr('target', '_blank');
+                $(".close-success-box, .mobile-close-success-box").attr('href', searchParams.get('closeRedirectDestination'));
             }
             if(searchParams.has('branding')){
                 if(searchParams.get('branding') === 'yes'){
@@ -237,7 +235,7 @@
                             `
 
                         }
-                        $('#questions-container').html(html_string);
+                        $('#questions-container, #questions-container-mobile').html(html_string);
                     },
                     error: function (e) {
                         console.log(e)
