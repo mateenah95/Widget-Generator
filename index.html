@@ -37,11 +37,7 @@
                         <input style="display: inline; width: auto;" type="radio" name="tool" value="hover-tool" checked>
                         <label for="hover-tool">Display All Time</label>
                         <br>
-                        <div hidden class="hover_tool_options" style="margin-top: 10px; margin-left: 30px;">
-                            <label for="which_url hidden">Pop up on which url</label>
-                            <input type="text" value="/" class="which_url_input sub-input">
-                        </div>
-                        <input style="display: inline; width: auto;" type="radio" name="tool" value="button-tool">
+                        <input style="display: inline; width: auto;" type="radio" disabled name="tool" value="button-tool">
                         <label for="button-tool">Use Button</label>
                         <br>
                         
@@ -94,21 +90,14 @@
                         <br><br>
                         <div class="final-output">
                             <!-- code textarea and copy btn start -->
-                            <textarea id="iframe-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
+                            <textarea id="all-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
                             <br>
-                            <input type="button" name="copy" value="COPY" class="cpy-btn" id="iframe-cpy-btn">
-                            <br><br>
-                            <textarea id="script-copy-code" class="copy-code" rows="8" cols="100" value=""></textarea>
                             <br>
-                            <input type="button" name="copy" value="COPY" class="cpy-btn" id="script-cpy-btn">
+                            <input type="button" name="copy" value="COPY" class="cpy-btn" id="all-cpy-btn">
+                            <br>
                             <!-- code textarea and copy btn end -->
                             <div class="bottom-info">
                                 <p>Place script code at the bottom of your body tag.</p>
-                                <p><strong style="color: black; margin-bottom: 0;">Note: </strong>Please make sure your website has the meta viewport tag.</p>
-                                <div class="branding-info">
-                                    <p class="italic-info"><i class="fas fa-info"></i></p>
-                                    <p>Conwersion's branding appears because, this script is not from a premium account.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,6 +108,7 @@
                                 <div class="preview-bubble-msg preview-tool-box">
                                     <p class="preview-bubble-txt">Would you like to get personalised script to convert your group members to paying customers?</p>
                                     <br>
+                                    <br>
                                     <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 15px 0px;">
                                 </div>
                                 <div style="height: 50px; width: 300px; margin-top: -15px;">
@@ -128,6 +118,10 @@
                             </div>
                             <div class="ques-preview">
                                 <div id="step-1" class="preview-tool-box preview-step-box">
+                                    <div style='display: flex; justify-content: space-between;'>
+                                        <p class="preview-step-heading"></p>
+                                        <span class=''>x</span>
+                                    </div>
                                     <p class="preview-step-heading">STEP 1 of 2</p>
                                     <p class="preview-step-ques preview-step-1-heading">Tell us more about yourself to create a personalized script</p>
                                     <label class="preview-ques-label" style="margin: 0px;">Question 1</label>
@@ -136,7 +130,8 @@
                                     <input type="text" value="" class="preview-ques-input" style="margin: 0px;" disabled>
                                     <br>
                                     <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: white; background: red; border: 2.5px solid red;">
-                                    <input type="button" value="Close" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: red; background: white;">
+                                    <br>
+                                    <br>
                                     <div id='branding'>
                                         <p style="color: #ccc; font-size: 9px; margin-bottom: 0;">Powered by </p>
                                         <a href='http://conwersion.com'><img id='cs-logo' src="./imgs/cs_logo.png" style="width: 100px; height: 25px" /></a>
@@ -206,6 +201,7 @@
                         let closeRedirectDestination = $("#close-redirect-destination").val();
                         let branding = $("input[name='branding']:checked").val();
                         let sharecode = $('.share-code').val();
+                        alert(sharecode)
 
                         let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}&closeRedirectDestination=${closeRedirectDestination}&branding=${branding}&sharecode=${sharecode}`;
                         let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
@@ -214,18 +210,37 @@
                         let scriptCode;
 
                         if (tool === "hover-tool") {
-                            generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" width="100%" height="100%" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;"></iframe>`;
-                            scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = 100 + '%';}};</scr` + `ipt>`
-                            }
+                            generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" width="100%" height="700px" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0;"></iframe>`;
+                            scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = document.getElementById("conwersion_tool_iframe").style.height;}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = 100 + '%';}};
+                                var isMobile = false;
+                                function detectMob() {
+                                    const toMatch = [
+                                        /Android/i,
+                                        /webOS/i,
+                                        /iPhone/i,
+                                        /iPad/i,
+                                        /iPod/i,
+                                        /BlackBerry/i,
+                                        /Windows Phone/i
+                                    ];
+
+                                    return toMatch.some((toMatchItem) => {
+                                        return navigator.userAgent.match(toMatchItem);
+                                    });
+                                }
+                                let isMobile = detectMob();
+                                if(!isMobile){
+                                    document.getElementById('conwersion_tool_iframe').setAttribute('width', '500px');
+                                }
+                            </scr` + `ipt>`}
                         else if (tool === "button-tool") {
                             generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}&${buttonParams}" id="conwersion_tool_iframe" frameborder="0" height="100%" width="100%" style="max-width: 130px; max-height: 41px; display: inline-block; border: 0px; overflow: hidden;"></iframe>`;
                             scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = '100vh';}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = e.data.frameHeight + 75 + 'px';} if (e.data.hasOwnProperty("hoverToolVis")) {document.getElementById("conwersion_tool_iframe").setAttribute("style", "width: 100%; z-index: 1000; position: fixed; bottom: 0; right: 0; left: 0;");}};</scr` + `ipt>`
                         }
-                        $('#iframe-copy-code').val(generate);
-                        $('#script-copy-code').val(scriptCode);
+                        $('#all-copy-code').val(generate+scriptCode);
             })
-            $("#iframe-cpy-btn").click(function() {
-                copyToClipboard("iframe-copy-code");
+            $("#all-cpy-btn").click(function() {
+                copyToClipboard("all-copy-code");
             });
             $("#script-cpy-btn").click(function() {
                 copyToClipboard("script-copy-code");
