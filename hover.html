@@ -131,7 +131,7 @@
                         <input id="email-input-desktop" type="text" value="" class="ques-input">
                         <p class='error-page-1' style="color: red;"></p>
                         <input type="submit" value="Confirm" class="submit-btn-desktop tool-btn" style='margin-bottom: 5px;'>
-                        <br>
+                        <button class="tool-btn back-btn" style='color: red; background: white; border: 0px;'>Back</button>
                         <br>
                         <div class='branding'>
                             <a href='http://conwersion.com' target='_blank'>
@@ -182,6 +182,7 @@
                             <input id="email-input-mobile" type="text" value="" class="ques-input">
                             <br>
                             <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn">
+                            <button class="tool-btn back-btn" style='color: red; background: white; border: 0px;'>Back</button>
                             <div class='branding'>
                                 <a href='http://conwersion.com' target='_blank'>
                                     <p class="powered-by-text">Powered by</p>
@@ -297,11 +298,21 @@
                         return;
                     }
                 }
+                $('.error-page-1')[0].innerText = '';
+                $('.error-page-1')[1].innerText = '';
                 $("#step-1").css("display", "none");
                 $("#step-2").fadeIn(250, () => {
                     $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
                 })
-                
+            })
+
+            $(".back-btn").click(() => {
+                $('.error-page-1')[0].innerText = '';
+                $('.error-page-1')[1].innerText = '';
+                $("#step-2").css("display", "none");
+                $("#step-1").fadeIn(250, () => {
+                    $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
+                })
             })
 
             $(".mobile-next-step-btn").click(() => {
@@ -313,6 +324,8 @@
                         return;
                     }
                 }
+                $('.error-page-1')[0].innerText = '';
+                $('.error-page-1')[1].innerText = '';
                 $("#mobile-step-2").fadeIn('fast');
                 $("#mobile-step-1").fadeOut('fast');
             })
