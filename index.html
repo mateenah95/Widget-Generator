@@ -119,14 +119,14 @@
                             <div class="ques-preview">
                                 <div id="step-1" class="preview-tool-box preview-step-box">
                                     <div style='display: flex; justify-content: space-between;'>
-                                        <p class="preview-step-heading"></p>
+                                        <p class=""></p>
                                         <span class=''>x</span>
                                     </div>
                                     <p class="preview-step-heading">STEP 1 of 2</p>
                                     <p class="preview-step-ques preview-step-1-heading">Tell us more about yourself to create a personalized script</p>
-                                    <label class="preview-ques-label" style="margin: 0px;">Question 1</label>
+                                    <label class="preview-ques-label preview-q1" style="margin: 0px;">Question 1</label>
                                     <input type="text" value="" class="preview-ques-input" style="margin: 0px;" disabled>
-                                    <label class="preview-ques-label" style="margin: 0px;">Question 2</label>
+                                    <label class="preview-ques-label preview-q2" style="margin: 0px;">Question 2</label>
                                     <input type="text" value="" class="preview-ques-input" style="margin: 0px;" disabled>
                                     <br>
                                     <input type="submit" value="Confirm" class="preview-tool-btn" style="width: 100%; margin: 5px 0px; color: white; background: red; border: 2.5px solid red;">
@@ -296,12 +296,16 @@
             $(".step-1-heading").on("keydown keyup keypress change", () => {
                 var h1 = $(".step-1-heading").val();
                 $(".preview-step-heading").text("STEP 1 of 2");
+                $(".preview-q1").text("Question 1");
+                $(".preview-q2").text("Question 2");
                 $(".preview-step-1-heading").text(h1);
             });
             $(".step-2-heading").on("keydown keyup keypress change", () => {
                 var h2 = $(".step-2-heading").val();
                 $(".preview-step-1-heading").text(h2);
                 $(".preview-step-heading").text("STEP 2 of 2");
+                $(".preview-q1").text("Name");
+                $(".preview-q2").text("Email");
             });
 
             // for live changes in button preview
