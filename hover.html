@@ -105,7 +105,7 @@
                         </div>
                         <p class="step-heading" style="text-align: center;">STEP 1 of 2</p>
                         <p class="step-ques step-1-heading">Tell us more about yourself to create a personalized script</p>
-                        <div id='questions-container' style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+                        <div id='questions-container' style="max-height: 200px; overflow-y: scroll; overflow-x: hidden;">
                         </div>
                         <p class='error-page-1' style="color: red;"></p>
                         <input type="submit" value="Confirm" class="next-step-btn tool-btn" style='margin-bottom: 5px;'>
@@ -149,7 +149,7 @@
                 <img src="imgs/Tool icon 1.png" alt="Conwersion Scripts" class="tool-img desktop" />
                 <div class="mobile">
                     <div class="preview">
-                        <h4 class="preview-text">Swipe Up to add script!</h4>
+                        <h4 class="preview-text" style="font-size: 1.25rem;">Swipe Up to add script!</h4>
                         <p class="bar" style="bottom: 8px; position: fixed; margin: 0 auto;"></p>
                     </div>
                     <div class="full-view">
@@ -159,12 +159,10 @@
                         </div>
                         <div id="mobile-step-1" class="tool-box step-box">
                             <p class="step-heading" style="font-size: 17px; margin-bottom: 10px;">STEP 1 of 2</p>
-                            <p class="step-ques step-1-heading" style="font-size: 1.3rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
+                            <p class="step-ques step-1-heading" style="font-size: 1.4rem; margin-top: 12px;">Tell us more about yourself to create a personalized script</p>
                             <div id='questions-container-mobile' style="height: 100%; overflow: scroll;">
                             </div>
-                            <br>
                             <p class='error-page-1' style="color: red;"></p>
-                            <br>
                             <input type="submit" value="Confirm" class="mobile-next-step-btn tool-btn">
                             <div class='branding'>
                                 <a href='http://conwersion.com' target='_blank'>
@@ -180,8 +178,8 @@
                             <input id="name-input-mobile" type="text" value="" class="ques-input">
                             <label for="ques-email" class="ques-label">Email</label>
                             <input id="email-input-mobile" type="text" value="" class="ques-input">
-                            <br>
-                            <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn">
+                            <p class='error-page-1' style="color: red;"></p>
+                            <input type="submit" value="Confirm" class="mobile-submit-btn tool-btn" style="margin-bottom: 10px;">
                             <button class="tool-btn back-btn" style='color: red; background: white; border: 0px;'>Back</button>
                             <div class='branding'>
                                 <a href='http://conwersion.com' target='_blank'>
@@ -309,8 +307,14 @@
             $(".back-btn").click(() => {
                 $('.error-page-1')[0].innerText = '';
                 $('.error-page-1')[1].innerText = '';
+                $('.error-page-1')[2].innerText = '';
+                $('.error-page-1')[3].innerText = '';
                 $("#step-2").css("display", "none");
                 $("#step-1").fadeIn(250, () => {
+                    $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
+                })
+                $("#mobile-step-2").css("display", "none");
+                $("#mobile-step-1").fadeIn(250, () => {
                     $('.hover-tool').css({ 'display': 'flex', 'flex-flow': 'row wrap', 'align-items': 'center', 'justify-content': 'center' })
                 })
             })
@@ -320,12 +324,13 @@
                 let i = 0;
                 for(i=0;i<answers.length;i++){
                     if(answers[i].value.length === 0){
-                        alert('Please answer all questions to continue!');
+                        $('.error-page-1')[2].innerText = 'Please answer all questions to continue!';
+                        $('.error-page-1')[3].innerText = 'Please answer all questions to continue!';
                         return;
                     }
                 }
-                $('.error-page-1')[0].innerText = '';
-                $('.error-page-1')[1].innerText = '';
+                $('.error-page-1')[2].innerText = '';
+                $('.error-page-1')[3].innerText = '';
                 $("#mobile-step-2").fadeIn('fast');
                 $("#mobile-step-1").fadeOut('fast');
             })
@@ -345,9 +350,12 @@
 
             $(".mobile-submit-btn").click(() => {
                 if($("#name-input-mobile")[0].value.length === 0 || $("#email-input-mobile")[0].value.length === 0){
-                    alert('Please answer all questions to continue!');
+                    $('.error-page-1')[2].innerText = 'Please answer all questions to continue!';
+                    $('.error-page-1')[3].innerText = 'Please answer all questions to continue!';
                     return;
                 }
+                $('.error-page-1')[2].innerText = '';
+                $('.error-page-1')[3].innerText = '';
                 $("#mobile-confirmation-box").fadeIn('fast');
                 $("#mobile-step-2").fadeOut('fast');
             })

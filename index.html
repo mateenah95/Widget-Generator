@@ -201,7 +201,6 @@
                         let closeRedirectDestination = $("#close-redirect-destination").val();
                         let branding = $("input[name='branding']:checked").val();
                         let sharecode = $('.share-code').val();
-                        alert(sharecode)
 
                         let hoverParams = `bubble=${encodeURIComponent(bubble.trim())}&h1=${encodeURIComponent(h1.trim())}&h2=${encodeURIComponent(h2.trim())}&tool=${tool}&url=${url}&icon=${icon}&closeRedirectDestination=${closeRedirectDestination}&branding=${branding}&sharecode=${sharecode}`;
                         let buttonParams = `label=${encodeURIComponent(label.trim())}&theme=${theme}`
@@ -210,7 +209,7 @@
                         let scriptCode;
 
                         if (tool === "hover-tool") {
-                            generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" width="100%" height="700px" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0;"></iframe>`;
+                            generate = `<iframe src="http://tools.conwersion.com/hover.html?${hoverParams}" id="conwersion_tool_iframe" frameborder="0" width="500px" height="700px" style="border: 0px; overflow: hidden; z-index: 1000; position: fixed; bottom: 0; right: 0;"></iframe>`;
                             scriptCode = `<script>window.onmessage = (e) => {if (e.data.hasOwnProperty("previewMobileView")) {document.getElementById("conwersion_tool_iframe").style.bottom = 0;}if (e.data.hasOwnProperty("fullMobileView")) {document.getElementById("conwersion_tool_iframe").style.height = document.getElementById("conwersion_tool_iframe").style.height;}if (e.data.hasOwnProperty("frameHeight")) {document.getElementById("conwersion_tool_iframe").style.height = 100 + '%';}};
                                 var isMobile = false;
                                 function detectMob() {
@@ -231,6 +230,10 @@
                                 let isMobile = detectMob();
                                 if(!isMobile){
                                     document.getElementById('conwersion_tool_iframe').setAttribute('width', '500px');
+                                    document.getElementById('conwersion_tool_iframe').setAttribute('height', '700px');
+                                }
+                                else {
+                                    document.getElementById('conwersion_tool_iframe').setAttribute('width', '100%');
                                 }
                             </scr` + `ipt>`}
                         else if (tool === "button-tool") {
